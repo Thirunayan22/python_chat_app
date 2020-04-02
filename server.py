@@ -11,17 +11,18 @@ PORT = 1234
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1) #Allows to reconnect to the same port without refining the port number each time
 
-print("Server started....")
-print("Waiting for clients.....")
+
 server_socket.bind((IP,PORT))
 server_socket.listen()
+
+
 
 #Storing the list of sockets(Clients)
 sockets_list = [server_socket]
 
 clients = {}
 
-
+print(f'Listening for connections on {IP}:{PORT}...')
 def recieve_message(client_socket):
 
 
@@ -69,4 +70,3 @@ while True :
         for  notified_socket in exception_sockets:
             sockets_list.remove(notified_socket)
             del clients[notified_socket]
-
